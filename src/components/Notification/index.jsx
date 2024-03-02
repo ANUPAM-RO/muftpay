@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-import './index.css'
+import "./index.css";
 
 const Notification = () => {
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
-  const selectedPagehandler = (selectedPage) => {
-    if (
-      selectedPage >= 1 &&
-      selectedPage <= totalPages &&
-      selectedPage !== page
-    ) {
-      setPage(selectedPage);
-    }
+  const lastIndex = currentPage * itemsPerPage;
+
+  const firstIndex = lastIndex - itemsPerPage;
+
+  // const currentItems = users?.slice(firstIndex, lastIndex);
+
+  // Function to handle next page
+  const nextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  // Function to handle previous page
+  const prevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
   };
   return (
     <div>
-        <p className="pb-6" style={{ color:"#222222" , fontWeight: 600}}>Notifications</p>
+      <p className="pb-6" style={{ color: "#222222", fontWeight: 600 }}>
+        Notifications
+      </p>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead
@@ -37,7 +45,7 @@ const Notification = () => {
                 Amount
               </th>
               <th scope="col" className="px-4 py-3 w-44">
-               Confirmation Sent
+                Confirmation Sent
               </th>
               <th scope="col" className="px-4 py-3 w-44">
                 Invoice Generated
@@ -101,37 +109,20 @@ const Notification = () => {
               <img src="./Share.svg" alt="" />
             </div>
             <div className="pagination">
-              <img
-                className={
-                  page > 1 ? "pagination__nondisable" : "pagination__disable"
-                }
-                onClick={() => selectedPagehandler(page - 1)}
-                src="./arrow-right 1.svg"
-                alt=""
-              />
-              {[...Array(totalPages)].map((_, i) => (
-                <span
-                  className={
-                    page === i + 1
-                      ? "pagination__selected"
-                      : "pagination__nonselected"
-                  }
-                  key={i}
-                  onClick={() => selectedPagehandler(i + 1)}
-                >
-                  {i + 1}
-                </span>
-              ))}
-              <img
-                src="./arrow-right 1 (1).svg"
-                alt=""
-                className={
-                  page < totalPages
-                    ? "pagination__nondisable"
-                    : "pagination__disable"
-                }
-                onClick={() => selectedPagehandler(page + 1)}
-              />
+              <button
+                onClick={prevPage}
+                disabled={currentPage === 1}
+                className="pagination__selected"
+              >
+                <img src="./arrow-right 1.svg" alt="" />
+              </button>
+              <button
+                onClick={nextPage}
+                // disabled={lastIndex >= users?.length}
+                className="pagination__selected"
+              >
+                <img src="./arrow-right 1 (1).svg" alt="" />
+              </button>
             </div>
           </div>
         </nav>

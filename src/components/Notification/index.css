@@ -3,27 +3,15 @@
     margin: 15px 0;
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
-.pagination>span,
-.pagination__nondisable {
+.pagination__selected {
+    background-color: #4db7fd;
+    color: white;
     padding: 2px 10px;
     border-radius: 8px;
 
     cursor: pointer;
     margin-left: 3px;
-}
-
-.pagination__nonselected,
-.pagination__nondisable {
-    background-color: #F3F4F8;
-}
-
-.pagination__selected {
-    background-color: #4DB7FD;
-    color: white;
-}
-
-.pagination__disable {
-    opacity: 0;
 }

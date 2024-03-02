@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import "./index.css";
+import useTransaction from "../../hooks/useTransaction";
+import { formatTime, getDateFromISOString } from "../../utiils";
 const Transaction = () => {
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(5);
+    const { transaction } = useTransaction();
+  console.log(transaction)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
-  const selectedPagehandler = (selectedPage) => {
-    if (
-      selectedPage >= 1 &&
-      selectedPage <= totalPages &&
-      selectedPage !== page
-    ) {
-      setPage(selectedPage);
-    }
+
+  // Logic to calculate the index of the last item on the current page
+  const lastIndex = currentPage * itemsPerPage;
+  // Logic to calculate the index of the first item on the current page
+  const firstIndex = lastIndex - itemsPerPage;
+  // Slice the data array to get the items for the current page
+  const currentItems = transaction?.slice(firstIndex, lastIndex);
+
+  // Function to handle next page
+  const nextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  // Function to handle previous page
+  const prevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
   };
   const sortOptions = [
     { lable: 2023, value: 2023 },
@@ -72,14 +84,16 @@ const Transaction = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="px-4 py-4">Ralph Edwards</td>
-              <td className="px-4 py-4">28/10/2012</td>
-              <td className="px-4 py-4">04:02 am</td>
+            {!!currentItems?.length && currentItems?.map((data, i) => (
+            <tr ket={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td className="px-4 py-4">{data?.name}</td>
+              <td className="px-4 py-4">{getDateFromISOString(data?.timestamp)}</td>
+              <td className="px-4 py-4">{formatTime(data?.timestamp)}</td>
               <td className="px-4 py-4">ICICI Bank</td>
-              <td className="px-4 py-4">$328.85</td>
+                <td className="px-4 py-4">${data?.amount}</td>
               <td className="px-4 py-4">Completed</td>
             </tr>
+            ))}
           </tbody>
         </table>
         <nav
@@ -97,40 +111,22 @@ const Transaction = () => {
             </span>
           </span>
 
-            
-            <div className="pagination">
-              <img
-                className={
-                  page > 1 ? "pagination__nondisable" : "pagination__disable"
-                }
-                onClick={() => selectedPagehandler(page - 1)}
-                src="./arrow-right 1.svg"
-                alt=""
-              />
-              {[...Array(totalPages)].map((_, i) => (
-                <span
-                  className={
-                    page === i + 1
-                      ? "pagination__selected"
-                      : "pagination__nonselected"
-                  }
-                  key={i}
-                  onClick={() => selectedPagehandler(i + 1)}
+             <div className="pagination">
+                <button
+                  onClick={prevPage}
+                  disabled={currentPage === 1}
+                  className="pagination__selected"
                 >
-                  {i + 1}
-                </span>
-              ))}
-              <img
-                src="./arrow-right 1 (1).svg"
-                alt=""
-                className={
-                  page < totalPages
-                    ? "pagination__nondisable"
-                    : "pagination__disable"
-                }
-                onClick={() => selectedPagehandler(page + 1)}
-              />
-            </div>
+                  <img src="./arrow-right 1.svg" alt="" />
+                </button>
+                <button
+                  onClick={nextPage}
+                  disabled={lastIndex >= transaction?.length}
+                  className="pagination__selected" 
+                >
+                  <img src="./arrow-right 1 (1).svg" alt="" />
+                </button>
+              </div>
         </nav>
       </div>
     </div>

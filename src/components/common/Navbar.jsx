@@ -1,9 +1,11 @@
 import React from 'react'
+import { currentDate } from '../../utiils'
 
 const Navbar = () => {
+  const date = currentDate()
   return (
     <div className='flex items-center justify-between'>
-          <p className='text-md font-semibold' style={{ color: "#A3A3A3" }}>Tue, 14 Nov, 2022, 11.30 AM </p>
+      <p className='text-md font-semibold' style={{ color: "#A3A3A3" }}>{date}</p>
           <div className='flex items-center gap-8 mr-4'>
            
               <div >

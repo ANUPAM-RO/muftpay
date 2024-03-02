@@ -1,29 +1,17 @@
 .pagination {
-    padding: 10px;
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-}
-
-.pagination>span,
-.pagination__nondisable {
-    padding: 2px 10px;
-    border-radius: 8px;
-
-    cursor: pointer;
-    margin-left: 3px;
-}
-
-.pagination__nonselected,
-.pagination__nondisable {
-    background-color: #F3F4F8;
+  padding: 10px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .pagination__selected {
-    background-color: #4DB7FD;
-    color: white;
-}
+  background-color: #4db7fd;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 8px;
 
-.pagination__disable {
-    opacity: 0;
+  cursor: pointer;
+  margin-left: 3px;
 }

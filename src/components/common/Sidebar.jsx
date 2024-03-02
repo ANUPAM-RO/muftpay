@@ -14,8 +14,8 @@ const Sidebar = () => {
         style={{ backgroundColor: "#001524", color: "#FFFFFF" }}
         aria-label="Sidebar"
       >
-        <div className=" py-4">
-          <div className="m-4">
+        <div className="py-4">
+          <div className="m-4 mb-10">
             <div className="flex justify-center">
               <img src="./MUFTPAY.svg" alt="Logo" />
             </div>
@@ -83,7 +83,7 @@ const Sidebar = () => {
             </li>
             <li className="m-4">
               <Link
-                to="/partners"
+                to="/payment"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
                   activeLink === 5 && "bg-blue-400 rounded-lg"
                 }`}
@@ -119,7 +119,7 @@ const Sidebar = () => {
             </li>
             <li className="m-4">
               <Link
-                to="/rating"
+                to="/support"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
                   activeLink === 8 && "bg-blue-400 rounded-lg"
                 }`}
