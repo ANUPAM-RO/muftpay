@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "../../index.css";
 import useTransaction from "../../hooks/useTransaction";
 import { formatTime, getDateFromISOString } from "../../utiils";
 const Transaction = () => {
@@ -8,13 +8,20 @@ const Transaction = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
+  const [filter, setFilter] = useState('');
+
+  // Handle filter change
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
 
   // Logic to calculate the index of the last item on the current page
   const lastIndex = currentPage * itemsPerPage;
   // Logic to calculate the index of the first item on the current page
   const firstIndex = lastIndex - itemsPerPage;
   // Slice the data array to get the items for the current page
-  const currentItems = transaction?.slice(firstIndex, lastIndex);
+  let currentItems = transaction?.slice(firstIndex, lastIndex);
 
   // Function to handle next page
   const nextPage = () => {
@@ -25,17 +32,30 @@ const Transaction = () => {
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-  const sortOptions = [
-    { lable: 2023, value: 2023 },
-    { lable: 2022, value: 2022 },
-    { lable: 2021, value: 2021 },
-    { lable: 2020, value: 2020 },
+const sortOptions = [
+  { lable: "Jan 2024", value: 0 },
+  { lable: "Feb 2024", value: 1 },
+  { lable: "Mar 2024", value: 2 },
+  { lable: "Apr 2024", value: 3 },
+  { lable: "May 2024", value: 4 },
+  { lable: "Jun 2024", value: 5 },
   ];
+  
+   currentItems = transaction?.filter(item => {
+  const date = new Date(item?.timestamp);
+    const month = date.getMonth();
+    const newArr = []
+    console.log(month , filter)
+    if (month == filter) newArr.push(item)
+    console.log(newArr)
+    return newArr
+  });
+  console.log(currentItems)
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex justify-between w-full p-4">
-          <p style={{ color:"#222222" , fontWeight: 600}}>All Transactions</p>
+          <p className="text-2xl" style={{ color:"#222222" , fontWeight: 600}}>All Transactions</p>
           <div>
             <select
               id="countries"
@@ -44,7 +64,8 @@ const Transaction = () => {
                 color: "#2497E7",
                 border: "1px solid #2497E7",
               }}
-              className="px-4 text-gray-900 text-sm rounded-md block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              onChange={handleFilterChange} value={filter}
+              className="px-4 text-gray-900 text-sm rounded-md block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             >
               <option selected disabled>
                 Year

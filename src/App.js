@@ -6,10 +6,10 @@ import Kyc from "./components/Kyc";
 import Transaction from "./components/Transaction";
 import Notification from "./components/Notification";
 import UserMange from "./components/UserManage";
-// import Payment from "./components/Payment";
-// import Reports from "./components/Reports";
-// import Security from "./components/Security";
-// import Support from "./components/Support";
+import Payment from "./components/Payment";
+import Reports from "./components/Reports";
+import Security from "./components/Security";
+import Support from "./components/Support";
 
 function App() {
   return (
@@ -21,10 +21,10 @@ function App() {
           <Route path="/transactions" element={<Transaction />} />
           <Route path="/user-management" element={<UserMange />} />
           <Route path="/notifications" element={<Notification />} />
-          {/* <Route path="/payment" element={<Payment />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/security" element={<Security />} />
-          <Route path="/support" element={<Support />} /> */}
+          <Route path="/support" element={<Support />} />
         </Routes>
       </Layout>
     </div>

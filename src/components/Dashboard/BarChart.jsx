@@ -41,10 +41,11 @@ export const data = {
   ],
 };
 const sortOptions = [
-  { lable: 2023, value: 2023 },
-  { lable: 2022, value: 2022 },
-  { lable: 2021, value: 2021 },
-  { lable: 2020, value: 2020 },
+  { lable: "Jan 2024", value: "jan" },
+  { lable: "Feb 2024", value: "feb" },
+  { lable: "Mar 2024", value: "mar" },
+  { lable: "Apr 2024", value: "apr" },
+  { lable: "May 2024", value: "may" },
 ];
 const BarChart = () => {
   return (
@@ -61,10 +62,10 @@ const BarChart = () => {
               color: "#2497E7",
               border: "1px solid #2497E7",
             }}
-            className="px-4 text-gray-900 text-sm rounded-md block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+            className="px-4 text-gray-900 text-sm rounded-md block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           >
             <option selected disabled>
-              Year
+              Month
             </option>
             {sortOptions?.map((data, i) => (
               <option key={i} value={data?.value}>

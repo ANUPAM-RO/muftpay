@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import "./index.css";
+import React, { useState , useRef } from "react";
+import "../../index.css";
 import useUsers from "../../hooks/useUsers";
+import { useReactToPrint } from 'react-to-print';
 const Kyc = () => {
   const { users } = useUsers();
-
+  const componentPdf = useRef()
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
+
+  const generatePDF = useReactToPrint({
+    content: () => componentPdf.current,
+    documentTitle: "KycData",
+    onAfterPrint:()=>alert("Data saved in pdf")
+  })
 
 
   // Logic to calculate the index of the last item on the current page
@@ -28,6 +35,7 @@ const Kyc = () => {
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div ref={componentPdf} style={{ width:'100%'}}>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead
             className="text-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -98,7 +106,8 @@ const Kyc = () => {
                 </tr>
               ))}
           </tbody>
-        </table>
+          </table>
+             </div>
         <nav
           className="flex items-center flex-column flex-wrap md:flex-row justify-between px-4"
           aria-label="Table navigation"
@@ -113,7 +122,7 @@ const Kyc = () => {
              {Math.ceil(users?.length/itemsPerPage)}
             </span>
           </span>
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={generatePDF}>
             <div
               style={{ backgroundColor: "#F5F5F5", color: "#222222" }}
               className="flex items-center gap-2 px-4 h-8 rounded-md cursor-pointer"

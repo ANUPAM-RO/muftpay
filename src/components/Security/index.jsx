@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
-import "../../index.css";
+import "./index.css";
 import { useReactToPrint } from "react-to-print";
 
-const Notification = () => {
+const Security = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-
-  const componentPdf = useRef();
+      const componentPdf = useRef();
+    const generatePDF = useReactToPrint({
+    content: () => componentPdf.current,
+    documentTitle: "KycData",
+    onAfterPrint:()=>alert("Data saved in pdf")
+  })
 
   const lastIndex = currentPage * itemsPerPage;
 
@@ -23,20 +27,16 @@ const Notification = () => {
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-
-  const generatePDF = useReactToPrint({
-    content: () => componentPdf.current,
-    documentTitle: "KycData",
-    onAfterPrint:()=>alert("Data saved in pdf")
-  })
-
   return (
-    <div>
-      <p className="text-2xl pb-6" style={{ color: "#222222", fontWeight: 600 }}>
-        Notifications
-      </p>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+       <div className=" flex justify-between text-xl pb-4 p-4" style={{ color: "#222222" }}>
+        <p className="font-bold text-2xl">Success Rate</p>
+        <div className='flex gap-2 cursor-pointer' onClick={generatePDF}>
+          <p style={{ color: "#2497E7" }}>Export</p>
+          <img src="./Share (1).svg" alt="" />
+        </div>
+      </div>
+      <div>
         <div ref={componentPdf}>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead
@@ -45,60 +45,31 @@ const Notification = () => {
           >
             <tr>
               <th scope="col" className="px-4 py-3">
-                Transaction #
+                Time Zone (IST)
               </th>
               <th scope="col" className="px-4 py-3">
-                Mobile Number
+                Administrator
               </th>
               <th scope="col" className="px-4 py-3">
-                Customer Name
+                Action
               </th>
               <th scope="col" className="px-4 py-3">
-                Amount
+                User
               </th>
-              <th scope="col" className="px-4 py-3 w-44">
-                Confirmation Sent
-              </th>
-              <th scope="col" className="px-4 py-3 w-44">
-                Invoice Generated
-              </th>
-              <th scope="col" className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td className="px-4 py-4">078 2824 3334 </td>
-              <td className="px-4 py-4">(209) 555-0104</td>
-              <td className="px-4 py-4">Flores, Juanita</td>
-              <td className="px-4 py-4">$275.43</td>
-              <td className="w-4 p-4">
-                <div className="flex items-center justify-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-1" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <td className="w-4 p-4">
-                <div className="flex items-center justify-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-1" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
+              <td className="px-4 py-4">15 May 2020 9:30 am</td>
+              <td className="px-4 py-4">Miles, Esther</td>
+              <td className="px-4 py-4">Log In</td>
+              <td className="px-4 py-4">Miles, Esther</td>
+        
             </tr>
           </tbody>
-          </table>
-          </div>
+        </table>
+
+        </div>
         <nav
           className="flex items-center flex-column flex-wrap md:flex-row justify-between px-4"
           aria-label="Table navigation"
@@ -145,4 +116,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default Security;
