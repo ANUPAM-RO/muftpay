@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Layout from "./Layout";
 import Dashboard from "./components/Dashboard";
 import Kyc from "./components/Kyc";
 import Transaction from "./components/Transaction";
@@ -10,13 +9,16 @@ import Payment from "./components/Payment";
 import Reports from "./components/Reports";
 import Security from "./components/Security";
 import Support from "./components/Support";
+import PrivateRoutes from "./utiils/PrivateRoutes";
+import Register from "./components/Register";
+import LogIn from "./components/LogIn";
 
 function App() {
   return (
     <div>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/kyc" element={<Kyc />} />
           <Route path="/transactions" element={<Transaction />} />
           <Route path="/user-management" element={<UserMange />} />
@@ -25,8 +27,10 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/security" element={<Security />} />
           <Route path="/support" element={<Support />} />
-        </Routes>
-      </Layout>
+        </Route>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   );
 }

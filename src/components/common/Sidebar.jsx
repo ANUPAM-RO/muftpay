@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState(0);
   const handleLinkClick = (index) => {
     setActiveLink(index);
   };
+  const navigate = useNavigate()
   return (
     <div>
       <aside
@@ -23,7 +24,7 @@ const Sidebar = () => {
           <ul className="space-y-2 font-medium">
             <li className="m-4">
               <Link
-                to="/"
+                to="/dashboard"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
                   activeLink === 0 && "bg-blue-400 rounded-lg"
                 }`}
@@ -132,7 +133,11 @@ const Sidebar = () => {
           </ul>
         </div>
         <div className="mb-6">
-          <div className="flex items-center justify-center  py-2 px-4 bg-gray-600 mx-4 mt-10 mb-4 rounded-md cursor-pointer">
+          <div className="flex items-center justify-center  py-2 px-4 bg-gray-600 mx-4 mt-10 mb-4 rounded-md cursor-pointer"
+            onClick={() => {
+              sessionStorage.removeItem("token");
+            navigate('/')
+          }}>
             <img src="./Frame 39997.svg" alt="" />
             <p className="ms-3 text-xl">Logout</p>
           </div>

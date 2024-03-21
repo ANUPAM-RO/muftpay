@@ -122,10 +122,11 @@ const Kyc = () => {
              {Math.ceil(users?.length/itemsPerPage)}
             </span>
           </span>
-          <div className="flex items-center" onClick={generatePDF}>
+          <div className="flex items-center" >
             <div
               style={{ backgroundColor: "#F5F5F5", color: "#222222" }}
               className="flex items-center gap-2 px-4 h-8 rounded-md cursor-pointer"
+              onClick={generatePDF}
             >
               Export
               <img src="./Share.svg" alt="" />

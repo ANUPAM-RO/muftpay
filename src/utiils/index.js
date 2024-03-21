@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const fetchApiData = async (url, token) => {
+export const fetchApiData = async (url) => {
+  let token = sessionStorage.getItem("token");
   const headers = {
     headers: {
       Authorization: "Bearer " + token,
