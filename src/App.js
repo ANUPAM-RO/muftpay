@@ -12,6 +12,8 @@ import Support from "./components/Support";
 import PrivateRoutes from "./utiils/PrivateRoutes";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import Invoice from "./components/Invoice";
+import Payouts from "./components/Payouts";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/security" element={<Security />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/invoice" element={<Invoice />} />
+          <Route path="/payout" element={<Payouts />} />
         </Route>
         <Route path="/" element={<LogIn />} />
         <Route path="/register" element={<Register />} />

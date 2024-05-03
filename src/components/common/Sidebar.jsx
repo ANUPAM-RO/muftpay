@@ -130,6 +130,30 @@ const Sidebar = () => {
                 <span className="ms-3">Support</span>
               </Link>
             </li>
+            <li className="m-4">
+              <Link
+                to="/invoice"
+                className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
+                  activeLink === 9 && "bg-blue-400 rounded-lg"
+                }`}
+                onClick={() => handleLinkClick(9)}
+              >
+                <img src="./Question.svg" alt="" />
+                <span className="ms-3">Invoice</span>
+              </Link>
+            </li>
+            <li className="m-4">
+              <Link
+                to="/payout"
+                className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
+                  activeLink === 10 && "bg-blue-400 rounded-lg"
+                }`}
+                onClick={() => handleLinkClick(10)}
+              >
+                <img src="./Question.svg" alt="" />
+                <span className="ms-3">Payouts</span>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="mb-6">

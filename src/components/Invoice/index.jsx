@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "../../index.css";
 import useTransaction from "../../hooks/useTransaction";
 import { formatTime, getDateFromISOString } from "../../utiils";
-const Transaction = () => {
+import { DialogDefault } from "../common/Dilogbox";
+const Invoice = () => {
+  const [openSuccess, setSuccess] = useState(false);
     const { transaction } = useTransaction();
   console.log(transaction)
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,7 +57,7 @@ const sortOptions = [
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex justify-between w-full p-4">
-          <p className="text-2xl" style={{ color:"#222222" , fontWeight: 600}}>All Transactions</p>
+          <p className="text-2xl" style={{ color:"#222222" , fontWeight: 600}}>Invoice</p>
           <div>
             <select
               id="countries"
@@ -102,16 +104,35 @@ const sortOptions = [
               <th scope="col" className="px-4 py-3">
                 Status
               </th>
+              <th scope="col" className="px-4 py-3">
+              Invoice
+              </th>
             </tr>
           </thead>
           <tbody>
+          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td className="px-4 py-4">Ralph Edwards</td>
+              <td className="px-4 py-4">28/10/2012</td>
+              <td className="px-4 py-4">04:02 am</td>
+              <td className="px-4 py-4">ICICI Bank</td>
+              <td className="px-4 py-4">$328.85</td>
+              <td className="px-4 py-4">Completed</td>
+              <td className="px-4 py-4">
+                <div>
+                  <button className="bg-[#4DB7FD] text-white font-[600] p-2 px-4 flex gap-3 rounded-lg" onClick={()=>setSuccess(true)}>
+                  Download
+                  <img src="../ic_round-download.png" alt="" />
+                  </button>
+                </div>
+              </td>
+            </tr>
             {!!currentItems?.length && currentItems?.map((data, i) => (
             <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td className="px-4 py-4">{data?.name}</td>
+              <td className="px-4 py-4">{data?.name}</td>
               <td className="px-4 py-4">{getDateFromISOString(data?.timestamp)}</td>
               <td className="px-4 py-4">{formatTime(data?.timestamp)}</td>
               <td className="px-4 py-4">ICICI Bank</td>
-                <td className="px-4 py-4">${data?.amount}</td>
+              <td className="px-4 py-4">${data?.amount}</td>
               <td className="px-4 py-4">Completed</td>
             </tr>
             ))}
@@ -150,8 +171,20 @@ const sortOptions = [
               </div>
         </nav>
       </div>
+      <DialogDefault open={openSuccess} handleOpen={setSuccess}>
+        <div className="flex justify-center items-center flex-col gap-[20px] h-[240px]">
+          <img src="../Mask group.png" alt="" />
+          <div className="text-[#484857] font-[600]">
+          <span>
+          You Have Successfully Download Invoice
+          </span>
+          <p className="text-center">Invoice ID : 44567</p>
+
+          </div>
+        </div>
+      </DialogDefault>
     </div>
   );
 };
 
-export default Transaction;
+export default Invoice;
