@@ -3,7 +3,7 @@ import "../../index.css";
 import useTransaction from "../../hooks/useTransaction";
 import { formatTime, getDateFromISOString } from "../../utiils";
 const Transaction = () => {
-    const { transaction } = useTransaction();
+    const { transaction , handleFilter} = useTransaction();
   console.log(transaction)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
@@ -12,7 +12,7 @@ const Transaction = () => {
 
   // Handle filter change
   const handleFilterChange = (e) => {
-    setFilter(e.target.value);
+    handleFilter(e.target.value);
   };
 
 
@@ -33,24 +33,14 @@ const Transaction = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 const sortOptions = [
-  { lable: "Jan 2024", value: 0 },
-  { lable: "Feb 2024", value: 1 },
-  { lable: "Mar 2024", value: 2 },
-  { lable: "Apr 2024", value: 3 },
-  { lable: "May 2024", value: 4 },
-  { lable: "Jun 2024", value: 5 },
+  { lable: "Jan 2024", value: '2024-01' },
+  { lable: "Feb 2024", value: '2024-02' },
+  { lable: "Mar 2024", value: '2024-03' },
+  { lable: "Apr 2024", value: '2024-04' },
+  { lable: "May 2024", value: '2024-05' },
+  { lable: "Jun 2024", value: '2024-06' },
   ];
   
-   currentItems = transaction?.filter(item => {
-  const date = new Date(item?.timestamp);
-    const month = date.getMonth();
-    const newArr = []
-    console.log(month , filter)
-    if (month == filter) newArr.push(item)
-    console.log(newArr)
-    return newArr
-  });
-  console.log(currentItems)
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -107,11 +97,11 @@ const sortOptions = [
           <tbody>
             {!!currentItems?.length && currentItems?.map((data, i) => (
             <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td className="px-4 py-4">{data?.name}</td>
-              <td className="px-4 py-4">{getDateFromISOString(data?.timestamp)}</td>
-              <td className="px-4 py-4">{formatTime(data?.timestamp)}</td>
-              <td className="px-4 py-4">ICICI Bank</td>
-                <td className="px-4 py-4">${data?.amount}</td>
+                <td className="px-4 py-4">{data?.userId?.name}</td>
+              <td className="px-4 py-4">{getDateFromISOString(data?.transactions?.[0]?.timestamp) || 'YYYY-MM_DD'}</td>
+              <td className="px-4 py-4">{formatTime(data?.transactions?.[0]?.timestamp)}</td>
+              <td className="px-4 py-4">{data?.transactions?.[0]?.type}</td>
+                <td className="px-4 py-4">${data?.transactions?.[0]?.amount || '00'}</td>
               <td className="px-4 py-4">Completed</td>
             </tr>
             ))}

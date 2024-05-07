@@ -165,3 +165,23 @@ export function getDateFromISOString(dateString) {
 
   return `${year}-${month}-${day}`;
 }
+
+export function getCurrentDateTime() {
+  // Create a new Date object representing the current date and time
+  const now = new Date();
+
+  // Format the date
+  const options = { 
+      year: 'numeric', 
+      month: 'short', 
+      day: '2-digit', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true 
+  };
+  const dateFormatter = new Intl.DateTimeFormat('en-US', options);
+  const formattedDate = dateFormatter.format(now);
+
+  // Return the formatted date
+  return formattedDate;
+}

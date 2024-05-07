@@ -24,24 +24,22 @@ ChartJS.register(
   Legend
 );
 
-const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: "Dataset 2",
-      data: [103, 73, 85, 66, 70, 95, 78],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+const AreaChart = ({result}) => {
 
-
-
-const AreaChart = () => {
+  const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+  const data = {
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: "User",
+        data: [result?.[0]?.data?.length , result?.[1]?.data?.length , result?.[2]?.data?.length , result?.[3]?.data?.length, result?.[4]?.data?.length , result?.[6]?.data?.length , result?.[3]?.data?.length],
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
   const componentPdf = useRef();
     const generatePDF = useReactToPrint({
     content: () => componentPdf.current,
@@ -65,7 +63,7 @@ const AreaChart = () => {
         </div>
       </div>
       <div ref={componentPdf} >
-          <Line data={data} style={{ height: "400px", width: "740px" }} />
+          <Line data={data}  style={{ height: "400px", width: "740px" }} />
       </div>
     
     </div>

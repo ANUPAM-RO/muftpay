@@ -6,7 +6,8 @@ import useTransaction from "../../hooks/useTransaction";
 
 const Dashboard = () => {
   const { transaction } = useTransaction();
-  console.log(transaction)
+  const lastTenData = transaction.slice(-8);
+
   return (
     <div className="flex gap-6">
       <div className="flex flex-col gap-6">
@@ -16,7 +17,7 @@ const Dashboard = () => {
         </div>
         <BarChart />
       </div>
-      <TransactionList data={transaction} />
+      <TransactionList data={lastTenData} />
     </div>
   );
 };
