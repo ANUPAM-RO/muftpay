@@ -8,13 +8,6 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
-  const [filter, setFilter] = useState('');
-
-  // Handle filter change
-  const handleFilterChange = (e) => {
-    handleFilter(e.target.value);
-  };
-
 
   // Logic to calculate the index of the last item on the current page
   const lastIndex = currentPage * itemsPerPage;
