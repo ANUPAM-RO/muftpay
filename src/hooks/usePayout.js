@@ -13,7 +13,7 @@ const usePayout = ({setSuccess1 = false}) => {
 
     const loadAllUserdata = async () => {
       const data = await fetchApiData(
-        "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money/history"
+        "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money/history/all"
       );
       setAllPayouts(data?.data);
       console.log(data?.data);
