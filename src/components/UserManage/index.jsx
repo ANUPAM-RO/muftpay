@@ -37,7 +37,7 @@ const filteredResult = result.filter(item => item !== null);
 console.log(transaction);
 
   const data = [
-    { title: "Total Users", count: users?.length },
+    { title: "Total Users", count: users?.length , url:'/users' },
     { title: "Users Increase", count: "45,223" },
     { title: "Users Decrease", count: "5,223" },
     { title: "User Growth", count: "45%" },

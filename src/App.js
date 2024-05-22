@@ -14,6 +14,7 @@ import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import Invoice from "./components/Invoice";
 import Payouts from "./components/Payouts";
+import Users from "./components/Users";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/payout" element={<Payouts />} />
+          <Route path="/users" element={<Users />} />
         </Route>
         <Route path="/" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
