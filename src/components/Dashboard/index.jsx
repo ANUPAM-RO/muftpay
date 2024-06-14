@@ -15,8 +15,8 @@ const Dashboard = () => {
 
 
   const todaysTrans = transaction?.filter((d)=>getDateFromISOString(d?.transactionDate) == currentDate)
-  const totalAmount = todaysTrans?.reduce((sum, transaction) => {
-    return sum + transaction?.amount;
+  const totalAmount = todaysTrans?.filter((d)=> d?.status == "Completed" ).reduce((sum, transaction) => {
+       return sum + transaction?.amount
   }, 0);
   console.log(totalAmount);
   return (
