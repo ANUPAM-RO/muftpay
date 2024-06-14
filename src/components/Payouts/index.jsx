@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../index.css";
 import {
   formatTime,
@@ -85,6 +85,7 @@ const Payouts = () => {
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
+
   const sortOptions = [
     { lable: "Jan 2024", value: "2024-01" },
     { lable: "Feb 2024", value: "2024-02" },
@@ -99,6 +100,15 @@ const Payouts = () => {
     { lable: "Nov 2024", value: "2024-11" },
     { lable: "Dec 2024", value: "2024-12" },
   ];
+
+  useEffect(() => {
+    // Get current month
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentMonthValue = `${currentYear}-${(currentMonthIndex + 1).toString().padStart(2, '0')}`;
+    setFilter(currentMonthValue);
+  }, []);
 
   return (
     <div className="mt-4 flex-1 mr-4">
@@ -125,7 +135,7 @@ const Payouts = () => {
                   value={filter}
                   className="px-4 text-gray-900 text-sm rounded-md block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 >
-                  <option selected disabled>
+                  <option disabled>
                     Year
                   </option>
                   {sortOptions?.map((data, i) => (
@@ -151,9 +161,7 @@ const Payouts = () => {
                   <th scope="col" className="px-4 py-3">
                     Time
                   </th>
-                  <th scope="col" className="px-4 py-3">
-                    Bank
-                  </th>
+                 
                   <th scope="col" className="px-4 py-3">
                     Amount To Pay
                   </th>
@@ -172,14 +180,14 @@ const Payouts = () => {
                       key={i}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
-                      <td className="px-4 py-4">{data?.recipientName}</td>
+                      <td className="px-4 py-4">{data?.userId?.name}</td>
                       <td className="px-4 py-4">
                         {getDateFromISOString(data?.transactionDate)}
                       </td>
                       <td className="px-4 py-4">
                         {formatTime(data?.transactionDate)}
                       </td>
-                      <td className="px-4 py-4">{data?.bankName}</td>
+                 
                       <td className="px-4 py-4">₹{data?.amount}</td>
                       <td className="px-4 py-4">
                         <div
