@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import "../../index.css";
 import { formatTime, getDateFromISOString } from "../../utiils";
 import useUsers from "../../hooks/useUsers";
+import Navbar from "../common/Navbar";
 const Users = () => {
     const {users} = useUsers();
   console.log(users)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState(users);
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    // Filter the data based on the search term
+    const results = users?.filter(
+      (item) =>
+        item?.name?.toLowerCase().includes(term.toLowerCase()) ||
+        item?.email?.toLowerCase().includes(term.toLowerCase()) ||
+        item?.mobileNumber?.toLowerCase().includes(term.toLowerCase()) ||
+        item?.userType?.toLowerCase().includes(term.toLowerCase())   
+    );
+    setSearchResults(results);
+  };
 
 
   // Logic to calculate the index of the last item on the current page
@@ -14,7 +31,9 @@ const Users = () => {
   // Logic to calculate the index of the first item on the current page
   const firstIndex = lastIndex - itemsPerPage;
   // Slice the data array to get the items for the current page
-  let currentItems = users?.slice(firstIndex, lastIndex);
+  let currentItems = !searchResults?.length
+  ? users?.slice(firstIndex, lastIndex)
+  : searchResults?.slice(firstIndex, lastIndex);
 
   // Function to handle next page
   const nextPage = () => {
@@ -25,17 +44,12 @@ const Users = () => {
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-const sortOptions = [
-  { lable: "Jan 2024", value: '2024-01' },
-  { lable: "Feb 2024", value: '2024-02' },
-  { lable: "Mar 2024", value: '2024-03' },
-  { lable: "Apr 2024", value: '2024-04' },
-  { lable: "May 2024", value: '2024-05' },
-  { lable: "Jun 2024", value: '2024-06' },
-  ];
+
   
   return (
-    <div>
+    <div className="mt-4 flex-1 mr-4">
+    <Navbar searchTerm={searchTerm} handleSearch={handleSearch} />
+    <div className="m-4" >
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex justify-between w-full p-4">
           <p className="text-2xl" style={{ color:"#222222" , fontWeight: 600}}>All Users</p>
@@ -113,6 +127,7 @@ const sortOptions = [
               </div>
         </nav>
       </div>
+    </div>
     </div>
   );
 };
