@@ -23,7 +23,7 @@ const ListCard = ({ data }) => {
         </p>
         <p
           className={
-            data?.status === "Completed" ? "text-[#10B981]" : "text-[#FFB444]"
+            data?.status === "Complete" ? "text-[#10B981]" : "text-[#FFB444]"
           }
         >
           {data?.status}
