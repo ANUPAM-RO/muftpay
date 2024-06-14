@@ -60,7 +60,7 @@ const sortOptions = [
               Date Of Birth
               </th>
               <th scope="col" className="px-4 py-3">
-              Aadhar Number
+              Pan Card Number
               </th>
               <th scope="col" className="px-4 py-3">
               User Type
@@ -74,7 +74,7 @@ const sortOptions = [
               <td className="px-4 py-4">{data?.email}</td>
               <td className="px-4 py-4">{data?.mobileNumber}</td>
               <td className="px-4 py-4">{getDateFromISOString(data?.dateOfBirth)}</td>
-                <td className="px-4 py-4">{data?.aadharNumber}</td>
+                <td className="px-4 py-4">{data?.panCardNumber}</td>
               <td className="px-4 py-4">{data?.userType}</td>
             </tr>
             ))}
