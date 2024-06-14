@@ -7,7 +7,7 @@ const useTransaction = () => {
 
   const loadTransactiondata = async () => {
     const data = await fetchApiData(
-      "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/wallet/transactions/all"
+      "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money/history/all"
      
     );
    

@@ -9,33 +9,14 @@ import Navbar from "../common/Navbar";
 const Dashboard = () => {
   const { transaction } = useTransaction();
 
+  console.log(transaction)
+
   var currentDate = getCurrentDate();
 
-  const todayTransactions = transaction.filter((obj) => {
-    // If transactions array exists and is not empty
-    if (obj.transactions && obj.transactions.length > 0) {
-      // Check if any transaction occurred today
-      return obj.transactions.some((transaction) => {
-        const transactionDate = getDateFromISOString(transaction.timestamp);
-        return transactionDate == currentDate;
-      });
-    }
-    return false; // Exclude objects without transactions or with empty transactions array
-  });
 
-  console.log(todayTransactions);
-  // const todaysTrans = transaction?.filter((d)=>getDateFromISOString(d?.transactions?.[0]?.timestamp) == currentDate)
-  const totalAmount = todayTransactions.reduce((total, obj) => {
-    // If transactions array exists and is not empty
-    if (obj.transactions && obj.transactions.length > 0) {
-      // Sum the amounts from all transactions
-      const transactionsAmount = obj.transactions.reduce((sum, transaction) => {
-        return sum + transaction.amount;
-      }, 0);
-      return total + transactionsAmount;
-    } else {
-      return total;
-    }
+  const todaysTrans = transaction?.filter((d)=>getDateFromISOString(d?.transactionDate) == currentDate)
+  const totalAmount = todaysTrans?.reduce((sum, transaction) => {
+    return sum + transaction?.amount;
   }, 0);
   console.log(totalAmount);
   return (
@@ -51,7 +32,7 @@ const Dashboard = () => {
                   style={{ color: "#222222" }}
                 >
                   <p>Todays Statistics: </p>
-                  <p>{todayTransactions?.length}</p>
+                  <p>{todaysTrans?.length}</p>
                 </div>
               </div>
               <div className="border border-gray-300 p-4 rounded-2xl">
@@ -66,7 +47,7 @@ const Dashboard = () => {
             </div>
             <BarChart />
           </div>
-          <TransactionList data={todayTransactions} />
+          <TransactionList data={todaysTrans} />
         </div>
       </div>
     </div>

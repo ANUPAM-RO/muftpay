@@ -10,13 +10,13 @@ const ListCard = ({ data }) => {
         <div>
           <p style={{ color: "#222222" }}>{data?.userId?.name}</p>
           <p style={{ color: "rgba(34, 34, 34, 0.5)" }}>
-            {formatDate(data?.transactions?.[0]?.timestamp)}
+            {formatDate(data?.transactionDate)}
           </p>
         </div>
       </div>
       <div className="text-right">
         <p className="font-semibold" style={{ color: "#222222" }}>
-        ₹{data?.transactions?.[0]?.amount}
+        ₹{data?.amount}
         </p>
         <p style={{ color: "#24AD6B" }}>Completed</p>
       </div>
