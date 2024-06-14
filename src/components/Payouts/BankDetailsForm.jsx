@@ -1,18 +1,8 @@
 import React from 'react'
 import usePayout from '../../hooks/usePayout'
 
-const BankDetailsForm = ({setSuccess1}) => {
+const BankDetailsForm = ({setSuccess1 , recipientName ,bankName,recipientIFSC, recipientAccountNumber,  amount}) => {
     const { 
-        recipientName,
-        setRecipientName,
-        recipientAccountNumber,
-        setRecipientAccountNumber,
-        bankName,
-        setBankName,
-        recipientIFSC,
-        setRecipientIFSC,
-        amount,
-        setAmount,
         handleSubmit
     } = usePayout({setSuccess1})
   return (
@@ -21,23 +11,23 @@ const BankDetailsForm = ({setSuccess1}) => {
             <div className='flex flex-col gap-6 text-[#484857]'> 
             <div>
                 <label>User Name</label>
-                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientName} onChange={(e)=>setRecipientName(e.target.value) } />
+                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientName} />
             </div>
             <div>
                 <label>Account Number</label>
-                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientAccountNumber} onChange={(e)=>setRecipientAccountNumber(e.target.value) }/>
+                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientAccountNumber} />
             </div>
             <div>
                 <label>IFSC Code</label>
-                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientIFSC} onChange={(e)=>setRecipientIFSC(e.target.value) } />
+                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={recipientIFSC}  />
             </div>
             <div>
                 <label>Bank Name</label>
-                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg'  value={bankName} onChange={(e)=>setBankName(e.target.value) } />
+                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg'  value={bankName}  />
             </div>
             <div>
                 <label>Amount</label>
-                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={amount} onChange={(e)=>setAmount(e.target.value) } />
+                <input type="text" className='w-full border border-[#8F8F8F] rounded-lg' value={amount}  />
             </div>
         </div>
         <div className='flex justify-center my-[30px]'>

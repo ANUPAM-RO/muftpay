@@ -50,7 +50,7 @@ const AreaChart = ({result}) => {
   return (
     <div
       className="border border-gray-300 p-4 rounded-2xl"
-      style={{ width: "800px" }}
+      style={{ width: "100%" }}
     >
       <div
         className=" flex justify-between text-xl pb-4"
@@ -63,7 +63,7 @@ const AreaChart = ({result}) => {
         </div>
       </div>
       <div ref={componentPdf} >
-          <Line data={data}  style={{ height: "400px", width: "740px" }} />
+          <Line data={data}  style={{ height: "45vh", width: "70vw" }} />
       </div>
     
     </div>

@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { createApiData, fetchApiData, updateApiData } from "../utiils";
 
-const usePayout = ({setSuccess1 = false}) => {
-  const [recipientName, setRecipientName] = useState([]);
-  const [recipientAccountNumber, setRecipientAccountNumber] = useState([]);
-  const [bankName, setBankName] = useState([]);
-  const [recipientIFSC, setRecipientIFSC] = useState([]);
-  const [amount, setAmount] = useState([]);
-  const [invoiceData , setInvoiceData]= useState([])
+const usePayout = ({ setSuccess1 = false }) => {
+  const [recipientName, setRecipientName] = useState("");
+  const [recipientAccountNumber, setRecipientAccountNumber] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [recipientIFSC, setRecipientIFSC] = useState("");
+  const [amount, setAmount] = useState("");
+  const [invoiceData, setInvoiceData] = useState([]);
+  const [filter, setFilter] = useState("");
 
-  const [allPayouts , setAllPayouts] = useState([])
+  const [allPayouts, setAllPayouts] = useState([]);
 
-    const loadAllUserdata = async () => {
-      const data = await fetchApiData(
-        "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money/history/all"
-      );
-      setAllPayouts(data?.data);
-      console.log(data?.data);
-      const filterData = data?.data?.filter((d)=> d?.status==="Completed")
-      setInvoiceData(filterData)
-    };
+  const loadAllUserdata = async () => {
+    const data = await fetchApiData(
+      "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money/history/all"
+    );
+    setAllPayouts(data?.data);
+    console.log(data?.data);
+    const filterData = data?.data?.filter((d) => d?.status === "Completed");
+    setInvoiceData(filterData);
+  };
+
+  const handleFilterChange = async (e) => {
+    const month = e.target.value;
+    setFilter(e.target.value);
+    const data = await fetchApiData(
+      `https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/SendMoney/filter-transactions?month=${month}`
+    );
+    setAllPayouts(data?.data);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,14 +40,13 @@ const usePayout = ({setSuccess1 = false}) => {
       recipientIFSC,
       amount,
     };
-  
+
     try {
       const response = await createApiData(
         "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money",
         formData
       );
-      setSuccess1(true)
-
+      setSuccess1(true);
     } catch (error) {
       console.log(error);
 
@@ -45,18 +54,16 @@ const usePayout = ({setSuccess1 = false}) => {
     }
   };
   const handleStatus = async (id) => {
-  
     const formData = {
-        status:"Completed"
+      status: "Completed",
     };
-  
+
     try {
       const response = await updateApiData(
-       `https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/transactions/${id}/status`,
+        `https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/transactions/${id}/status`,
         formData
       );
- await loadAllUserdata()
-
+      await loadAllUserdata();
     } catch (error) {
       console.log(error);
 
@@ -64,9 +71,9 @@ const usePayout = ({setSuccess1 = false}) => {
     }
   };
 
-    useEffect(() => {
-      loadAllUserdata();
-    }, []);
+  useEffect(() => {
+    loadAllUserdata();
+  }, []);
   return {
     recipientName,
     setRecipientName,
@@ -80,8 +87,12 @@ const usePayout = ({setSuccess1 = false}) => {
     setAmount,
     allPayouts,
     invoiceData,
+    filter,
+    setFilter,
+    setAllPayouts,
     handleSubmit,
-    handleStatus
+    handleStatus,
+    handleFilterChange,
   };
 };
 

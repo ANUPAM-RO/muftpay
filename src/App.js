@@ -15,6 +15,7 @@ import LogIn from "./components/LogIn";
 import Invoice from "./components/Invoice";
 import Payouts from "./components/Payouts";
 import Users from "./components/Users";
+import ChangePass from "./components/common/ChangePass";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/payout" element={<Payouts />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/change-pass" element={<ChangePass />} />
         </Route>
         <Route path="/" element={<LogIn />} />
         <Route path="/register" element={<Register />} />

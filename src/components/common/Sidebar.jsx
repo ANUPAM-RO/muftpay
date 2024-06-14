@@ -11,7 +11,7 @@ const Sidebar = () => {
     <div>
       <aside
         id="logo-sidebar"
-        className="flex flex-col justify-between z-40 w-60  transition-transform -translate-x-full sm:translate-x-0 h-[100%]"
+        className="flex flex-col justify-between z-40 w-60  transition-transform -translate-x-full sm:translate-x-0 h-[100vh]"
         style={{ backgroundColor: "#001524", color: "#FFFFFF" }}
         aria-label="Sidebar"
       >
@@ -46,7 +46,7 @@ const Sidebar = () => {
                 <span className="ms-3">KYC</span>
               </Link>
             </li>
-            <li className="m-4">
+            {/* <li className="m-4">
               <Link
                 to="/transactions"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
@@ -57,7 +57,7 @@ const Sidebar = () => {
                 <img src="./ClockCounterClockwise.svg" alt="" />
                 <span className="ms-3">Transactions</span>
               </Link>
-            </li>
+            </li> */}
             <li className="m-4">
               <Link
                 to="/user-management"
@@ -70,7 +70,7 @@ const Sidebar = () => {
                 <span className="ms-3">User Management</span>
               </Link>
             </li>
-            <li className="m-4">
+            {/* <li className="m-4">
               <Link
                 to="/notifications"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
@@ -117,7 +117,7 @@ const Sidebar = () => {
                 <img src="./ShieldCheck.svg" alt="" />
                 <span className="ms-3">Security</span>
               </Link>
-            </li>
+            </li> */}
             <li className="m-4">
               <Link
                 to="/support"
@@ -130,7 +130,7 @@ const Sidebar = () => {
                 <span className="ms-3">Support</span>
               </Link>
             </li>
-            <li className="m-4">
+            {/* <li className="m-4">
               <Link
                 to="/invoice"
                 className={`flex items-center py-2 px-4 dark:text-white  dark:hover:bg-gray-700 group ${
@@ -141,7 +141,7 @@ const Sidebar = () => {
                 <img src="./Question.svg" alt="" />
                 <span className="ms-3">Invoice</span>
               </Link>
-            </li>
+            </li> */}
             <li className="m-4">
               <Link
                 to="/payout"

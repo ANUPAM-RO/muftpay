@@ -9,7 +9,7 @@ const useUsers = () => {
       "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/getAll"
     );
     setAllUsers(data);
-    console.log(data);
+
   };
 
   useEffect(() => {

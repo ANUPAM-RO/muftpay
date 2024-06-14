@@ -2,11 +2,27 @@ import React, { useState , useRef } from "react";
 import "../../index.css";
 import useUsers from "../../hooks/useUsers";
 import { useReactToPrint } from 'react-to-print';
+import Navbar from "../common/Navbar";
 const Kyc = () => {
   const { users } = useUsers();
   const componentPdf = useRef()
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+ 
+    // Filter the data based on the search term
+    const results = users?.filter(item =>
+      item?.name?.toLowerCase().includes(term.toLowerCase()) ||
+      item?.panCardNumber?.toLowerCase().includes(term.toLowerCase())
+    );
+    setSearchResults(results);
+  };
 
   const generatePDF = useReactToPrint({
     content: () => componentPdf.current,
@@ -20,7 +36,7 @@ const Kyc = () => {
   // Logic to calculate the index of the first item on the current page
   const firstIndex = lastIndex - itemsPerPage;
   // Slice the data array to get the items for the current page
-  const currentItems = users?.slice(firstIndex, lastIndex);
+  let currentItems = !searchResults?.length ? users?.slice(firstIndex, lastIndex) : searchResults?.slice(firstIndex, lastIndex);
 
   // Function to handle next page
   const nextPage = () => {
@@ -33,7 +49,9 @@ const Kyc = () => {
   };
 
   return (
-    <div>
+        <div className="mt-4 flex-1 mr-4">
+        <Navbar searchTerm={searchTerm} handleSearch={handleSearch}/>
+        <div className="m-4">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div ref={componentPdf} style={{ width:'100%'}}>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -48,19 +66,11 @@ const Kyc = () => {
               <th scope="col" className="px-4 py-3">
                 Customer Name
               </th>
-              <th scope="col" className="px-4 py-3">
-                Aadhar Card Number
-              </th>
+          
               <th scope="col" className="px-4 py-3">
                 Pan Card Number
               </th>
-              <th scope="col" className="px-4 py-3 w-36">
-                Pan Card Upload
-              </th>
-              <th scope="col" className="px-4 py-3 w-44">
-                Aadhar Card Upload
-              </th>
-              <th scope="col" className="px-4 py-3"></th>
+           
             </tr>
           </thead>
           <tbody>
@@ -72,37 +82,8 @@ const Kyc = () => {
                 >
                   <td className="px-4 py-4">#</td>
                   <td className="px-4 py-4">{data?.name}</td>
-                  <td className="px-4 py-4">{data?.aadharNumber}</td>
                   <td className="px-4 py-4">{data?.panCardNumber}</td>
-                  <td className="w-4 p-4">
-                    <div className="flex items-center justify-center">
-                      <input
-                        id="checkbox-table-search-1"
-                        type="checkbox"
-                        checked={data?.aadharCardImage}
-                        className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                      <label for="checkbox-table-search-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="w-4 p-4">
-                    <div className="flex items-center justify-center">
-                      <input
-                        id="checkbox-table-search-1"
-                        type="checkbox"
-                        checked={data?.panCardImage}
-                        className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                      <label for="checkbox-table-search-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="flex items-center px-6 py-4">
-                    <img src="./Component 5.svg" alt="" />
-                  </td>
+              
                 </tr>
               ))}
           </tbody>
@@ -150,7 +131,10 @@ const Kyc = () => {
             </div>
         </nav>
       </div>
-    </div>
+
+        </div>
+      </div>
+  
   );
 };
 

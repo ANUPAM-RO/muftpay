@@ -101,7 +101,7 @@ const sortOptions = [
               <td className="px-4 py-4">{getDateFromISOString(data?.transactions?.[0]?.timestamp) || 'YYYY-MM_DD'}</td>
               <td className="px-4 py-4">{formatTime(data?.transactions?.[0]?.timestamp)}</td>
               <td className="px-4 py-4">{data?.transactions?.[0]?.type}</td>
-                <td className="px-4 py-4">${data?.transactions?.[0]?.amount || '00'}</td>
+                <td className="px-4 py-4">₹{data?.transactions?.[0]?.amount || '00'}</td>
               <td className="px-4 py-4">Completed</td>
             </tr>
             ))}

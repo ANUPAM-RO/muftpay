@@ -185,3 +185,23 @@ export function getCurrentDateTime() {
   // Return the formatted date
   return formattedDate;
 }
+
+export function getCurrentDate() {
+  // Get current date
+  var currentDate = new Date();
+
+  // Get day, month, and year
+  var day = currentDate.getDate();
+  var month = currentDate.getMonth() + 1; // Month is zero-indexed, so we add 1
+  var year = currentDate.getFullYear();
+
+  // Format day and month to have leading zeros if necessary
+  day = (day < 10 ? '0' : '') + day;
+  month = (month < 10 ? '0' : '') + month;
+
+  // Construct the date string in the desired format
+  var formattedDate = day + '-' + month + '-' + year;
+
+  return formattedDate;
+}
+

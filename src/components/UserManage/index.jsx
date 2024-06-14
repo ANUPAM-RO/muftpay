@@ -3,6 +3,7 @@ import UserCard from "./UserCard";
 import AreaChart from "./AreaChart";
 import useUsers from "../../hooks/useUsers";
 import useTransaction from "../../hooks/useTransaction";
+import Navbar from "../common/Navbar";
 
 const UserMange = () => {
   const { users } = useUsers();
@@ -44,6 +45,9 @@ console.log(transaction);
   ];
 
   return (
+    <div className="mt-4 flex-1 mr-4">
+    <Navbar />
+    <div className="m-4">
     <div>
       <p
         className="pb-6 text-2xl"
@@ -59,26 +63,13 @@ console.log(transaction);
         </div>
         <div className="flex gap-4">
           <AreaChart result={filteredResult}/>
-          <div className="border border-gray-300 p-4 rounded-2xl w-full">
-            <div
-              className="flex justify-between font-bold pb-2"
-              style={{ color: "#222222" }}
-            >
-              <p>Transaction ID</p>
-              <p>Risk Score</p>
-            </div>
-            <div className="flex flex-col gap-4">
-              {transaction?.map((d, i) => (
-                <div className="flex justify-between font-semibold">
-                  <p>{d?.transactions?.[0]?._id}</p>
-                  <p>1080</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>
+
+    </div>
+  </div>
   );
 };
 

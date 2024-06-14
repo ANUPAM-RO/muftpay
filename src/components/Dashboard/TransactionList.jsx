@@ -3,7 +3,7 @@ import ListCard from "./ListCard";
 
 const TransactionList = ({data}) => {
   return (
-    <div className="border border-gray-300 p-4 rounded-2xl h-fit w-full">
+    <div className="border border-gray-300 p-4 rounded-2xl h-fit w-[30vw]">
       <p className="text-2xl font-bold pb-6" style={{ color: "#222222" }}>
         Recent Transactions
           </p>

@@ -146,11 +146,11 @@ const Invoice = () => {
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
             Showing
             <span className="font-semibold text-gray-900 dark:text-white px-1">
-              1-5
+             {currentPage}
             </span>
             of
             <span className="font-semibold text-gray-900 dark:text-white pl-1">
-              100
+            {Math.ceil(invoiceData?.length / itemsPerPage)}
             </span>
           </span>
 
