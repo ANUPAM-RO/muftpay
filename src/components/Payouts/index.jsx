@@ -46,7 +46,7 @@ const Payouts = () => {
     // Filter the data based on the search term
     const results = allPayouts?.filter(
       (item) =>
-        item?.recipientName.toLowerCase().includes(term.toLowerCase()) ||
+        item?.userId?.name?.toLowerCase().includes(term.toLowerCase()) ||
         item?.status?.toLowerCase().includes(term.toLowerCase()) ||
         item?.bankName?.toLowerCase().includes(term.toLowerCase()) ||
         getDateFromISOString(item?.transactionDate)?.includes(
