@@ -274,7 +274,7 @@ const Payouts = () => {
                 bankName={bankName}
                 recipientIFSC={recipientIFSC}
                 amount={amount}
-                setSuccess1={setSuccess1}
+                setSuccess1={setSuccess}
               />
             </div>
           </DialogDefault>
@@ -303,7 +303,7 @@ const Payouts = () => {
               </div>
             </div>
           </DialogDefault> */}
-          <DialogDefault open={openSuccess1} handleOpen={setSuccess1}>
+          {/* <DialogDefault open={openSuccess1} handleOpen={setSuccess1}>
             <div className="flex justify-center items-center flex-col gap-[20px] mt-[30px]">
               <img src="../Mask group.png" alt="" />
               <div className="text-[#484857] text-center">
@@ -329,7 +329,7 @@ const Payouts = () => {
                 </button>
               </div>
             </div>
-          </DialogDefault>
+          </DialogDefault> */}
         </div>
       </div>
     </div>

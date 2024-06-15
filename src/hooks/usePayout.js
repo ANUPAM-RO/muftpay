@@ -41,7 +41,7 @@ const usePayout = ({ setSuccess1 = false , data={}}) => {
         "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money",
         formData
       );
-      setSuccess1(true);
+      
     } catch (error) {
       console.log(error);
 
