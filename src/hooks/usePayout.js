@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createApiData, fetchApiData, updateApiData } from "../utiils";
 
-const usePayout = ({ setSuccess1 = false , data={}}) => {
+const usePayout = ({ setSuccess1 = false , transId}) => {
   const [recipientName, setRecipientName] = useState("");
   const [recipientAccountNumber, setRecipientAccountNumber] = useState("");
   const [bankName, setBankName] = useState("");
@@ -34,13 +34,16 @@ const usePayout = ({ setSuccess1 = false , data={}}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
    
-    const formData = data
+   
+    const formData = {status: "Completed"}
 
     try {
-      const response = await createApiData(
-        "https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev/api/user/send-money",
+      const response = await updateApiData(
+        `https://pu4pz7ueab.execute-api.ap-south-1.amazonaws.com/dev//api/user/transactions/${transId}/status`,
         formData
       );
+      setSuccess1(true)
+      await loadAllUserdata()
       
     } catch (error) {
       console.log(error);

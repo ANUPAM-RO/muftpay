@@ -1,10 +1,10 @@
 import React from 'react'
 import usePayout from '../../hooks/usePayout'
 
-const BankDetailsForm = ({setSuccess1 , recipientName , bankName , recipientIFSC, recipientAccountNumber,  amount}) => {
-    // const { 
-    //     handleSubmit
-    // } = usePayout({setSuccess1 , data: {recipientName , bankName , recipientIFSC, recipientAccountNumber,  amount}})
+const BankDetailsForm = ({setSuccess1 , transId, recipientName , bankName , recipientIFSC, recipientAccountNumber,  amount}) => {
+    const { 
+        handleSubmit
+    } = usePayout({setSuccess1 , transId})
   return (
     <div>
         <p className='text-[#222222] font-[600] text-[22px] pb-6'>User Bank Details</p>
@@ -31,7 +31,7 @@ const BankDetailsForm = ({setSuccess1 , recipientName , bankName , recipientIFSC
             </div>
         </div>
         <div className='flex justify-center my-[30px]'>
-        <button className='bg-[#4DB7FD] text-white w-[180px] py-1 rounded-lg font-semibold' onClick={()=>setSuccess1(false)} >Submit</button>
+        <button className='bg-[#4DB7FD] text-white w-[180px] py-1 rounded-lg font-semibold' onClick={handleSubmit} >Submit</button>
         </div>
         
     </div>
