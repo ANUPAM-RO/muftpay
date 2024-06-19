@@ -275,6 +275,7 @@ const Payouts = () => {
                 recipientIFSC={recipientIFSC}
                 amount={amount}
                 transId={transId}
+                setSuccess={setSuccess}
                 setSuccess1={setSuccess1}
               />
             </div>

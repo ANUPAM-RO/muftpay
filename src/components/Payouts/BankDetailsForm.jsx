@@ -1,13 +1,17 @@
 import React from 'react'
 import usePayout from '../../hooks/usePayout'
 
-const BankDetailsForm = ({setSuccess1 , transId, recipientName , bankName , recipientIFSC, recipientAccountNumber,  amount}) => {
+const BankDetailsForm = ({setSuccess1 , setSuccess, transId, recipientName , bankName , recipientIFSC, recipientAccountNumber,  amount}) => {
     const { 
         handleSubmit
     } = usePayout({setSuccess1 , transId})
   return (
     <div>
+        <div className='flex justify-between'>
         <p className='text-[#222222] font-[600] text-[22px] pb-6'>User Bank Details</p>
+        <p className='text-[28px] cursor-pointer' onClick={()=> setSuccess(false)}>x</p>
+
+        </div>
             <div className='flex flex-col gap-6 text-[#484857]'> 
             <div>
                 <label>User Name</label>
